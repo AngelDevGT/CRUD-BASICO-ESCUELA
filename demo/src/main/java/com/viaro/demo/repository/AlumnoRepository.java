@@ -1,9 +1,9 @@
 package com.viaro.demo.repository;
 
 import com.viaro.demo.entity.Alumno;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AlumnoRepository extends CrudRepository<Alumno, Long> {
+public interface AlumnoRepository extends JpaRepository<Alumno, Long> {
 }

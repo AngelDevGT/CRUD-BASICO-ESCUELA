@@ -13,9 +13,9 @@ public class GradoController {
     @Autowired
     private GradoService gradoService;
 
-    @PostMapping("/grado")
-    public Grado saveGrado(@RequestBody Grado grado) {
-        return gradoService.saveGrado(grado);
+    @PostMapping("/profesor/{id}/grado")
+    public Grado saveGrado(@PathVariable("id") Long id, @RequestBody Grado grado) {
+        return gradoService.saveGrado(id, grado.getNombre());
     }
 
     @GetMapping("/grados")
@@ -26,6 +26,11 @@ public class GradoController {
     @GetMapping("/grado/{id}")
     public Grado findGradoById(@PathVariable("id") Long id){
         return gradoService.findGradoById(id);
+    }
+
+    @GetMapping("/profesor/{id}/grado")
+    public List<Grado> findGradoByProfesorId(@PathVariable("id") Long id){
+        return gradoService.findGradoByProfesorId(id);
     }
 
     @PutMapping("/grado/{id}")

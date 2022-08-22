@@ -6,9 +6,11 @@ import java.util.List;
 
 public interface GradoService {
 
-    Grado saveGrado(Grado grado);
+    Grado saveGrado(Long profesorId, String nombre);
 
     List<Grado> getGradoList();
+
+    List<Grado> findGradoByProfesorId(Long profesorId);
 
     Grado findGradoById(Long gradoId);
 

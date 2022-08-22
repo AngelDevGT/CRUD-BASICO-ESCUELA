@@ -1,26 +1,39 @@
 package com.viaro.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "alumno_grado")
 public class AlumnoGrado {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "seccion")
     private String seccion;
-    private Long AlumnoId;
-    private Long GradoId;
+    @OneToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "alumno_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonAlias({"alumnoId"})
+//    @JsonIgnore
+    private Alumno alumnoId;
+    @OneToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "grado_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonAlias({"gradoId"})
+//    @JsonIgnore
+    private Grado gradoId;
 }
